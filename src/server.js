@@ -25,7 +25,7 @@ export function setupServer() {
     });
   });
 
-  app.use('/students', async (req, res) => {
+  app.use('/contacts', async (req, res) => {
     const contacts = await getAllContacts();
 
     res.status(200).json({
@@ -35,7 +35,7 @@ export function setupServer() {
     });
   });
 
-  app.use('/students/:studentId', async (req, res, next) => {
+  app.use('/contacts/:contactId', async (req, res, next) => {
     const contactId = req.params.contactsId;
     const contact = await getContactsById(contactId);
 
