@@ -1,15 +1,13 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
-import {env} from '../utils/env.js';
+import { env } from './utils/env.js';
+import { getAllContacts, getContactsById } from './services/contacts.js';
 
 const PORT = Number(env('PORT', '3000'));
 
-function setupServer() {
+export function setupServer() {
   const app = express();
-
-  app.use(express.json());
-  app.use(cors());
 
   app.use(
     pino({
@@ -19,13 +17,43 @@ function setupServer() {
     }),
   );
 
+  app.use(cors());
+
   app.get('/', (req, res) => {
     res.json({
-        message: '',
+      message: 'Hello! Welcome to ContactsApp!',
     });
   });
 
-  app.use('*', (req, res, next) => {
+  app.use('/contacts', async (req, res) => {
+    const contacts = await getAllContacts();
+
+    res.status(200).json({
+      status: 200,
+      message: 'Successfully found contacts!',
+      data: contacts,
+    });
+  });
+
+  app.use('/contacts/:contactId', async (req, res, next) => {
+    const contactId = req.params.contactsId;
+    const contact = await getContactsById(contactId);
+
+    if (!contact) {
+      res.status(404).json({
+        message: 'Not found',
+      });
+      return;
+    }
+
+    res.status(200).json({
+      status: 200,
+      message: `Successfully found contact with id ${contactId}!`,
+      data: contact,
+    });
+  });
+
+  app.use('*', (req, res) => {
     res.status(404).json({
       message: 'Not found',
     });
