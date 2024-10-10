@@ -1,8 +1,0 @@
-{
-    "name": "John Doe",
-    "email": "jojndoe@mail.com",
-    "phoneNumber": "1234567",
-    "email": "john@ukr.net",
-    "isFavourite": false,
-    "contactType": "home"
-  }
