@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export const createContactsValidationSchema = Joi.object({
+export const createContactSchema = Joi.object({
   name: Joi.string().min(3).max(20).required().messages({
     'string.base': 'Name should be a string',
     'string.min': 'Name should have at least {#limit} characters',
