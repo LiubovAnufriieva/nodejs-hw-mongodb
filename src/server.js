@@ -9,6 +9,8 @@ import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import cookieParser from 'cookie-parser';
 
+import { UPLOAD_DIR } from './constants/index.js';
+
 const PORT = Number(env('PORT', '3000'));
 
 export const setupServer = () => {
@@ -18,6 +20,7 @@ export const setupServer = () => {
   app.use(cors());
   app.use(cookieParser());
 
+  app.use('/uploads', express.static(UPLOAD_DIR));
   app.use(
     pino({
       transport: {
@@ -38,7 +41,11 @@ export const setupServer = () => {
 
   app.use(errorHandler);
 
+ 
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
 };
+
+
