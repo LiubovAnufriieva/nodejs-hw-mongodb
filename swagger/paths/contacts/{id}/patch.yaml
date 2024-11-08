@@ -1,0 +1,87 @@
+tags:
+  - Contacts
+summary: Update contact
+operationId: updateContact
+description: 'Update contact'
+security:
+  - bearerAuth: []
+parameters:
+  - in: path
+    name: id
+    required: true
+    schema:
+      type: string
+      example: '6726552af87b1c81c7350bac'
+requestBody:
+  content:
+    multipart/form-data:
+      schema:
+        type: object
+        properties:
+          name:
+            description: "Contact's name"
+            type: string
+            example: 'Rose Watson'
+          phoneNumber:
+            description: "Contact's phone number"
+            type: string
+            example: '+38000000361'
+          email:
+            description: "Contact's email"
+            type: string
+            format: email
+            example: rosewatson@gmail.com
+          isFavourite:
+            description: 'Is the contact marked as favourite?'
+            type: boolean
+            example: false
+          contactType:
+            description: 'What type of contact is this'
+            type: string
+            enum: ['work', 'home', 'personal']
+            example: personal
+          photo:
+            description: "Link to contact's photo"
+            type: string
+            format: binary
+            example: https://res.cloudinary.com/de3pzgt9w/image/upload/v1730990743/kbox8a38w7i6fvoebjwd.webp
+responses:
+  '200':
+    description: 'Create a contact'
+    content:
+      application/json:
+        schema:
+          type: object
+          required:
+            - status
+            - message
+            - data
+          properties:
+            status:
+              type: integer
+              example: 200
+            message:
+              type: string
+              example: Successfully created a contact!
+            data:
+              type: object
+              $ref: '../../../components/schemas/contact.yaml'
+  '400':
+    description: Bad request, invalid input data.
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            status:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: Invalid input data. Please check the request body.
+  '401':
+    $ref: '../../../components/responses/401.yaml'
+  '404':
+    $ref: '../../../components/responses/404.yaml'
+  '500':
+    $ref: '../../../components/responses/500.yaml'
