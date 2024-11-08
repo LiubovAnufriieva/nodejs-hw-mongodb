@@ -14,7 +14,7 @@ tags:
     description: Auth operations.
 servers: 
   - url: http://localhost:3000
-  - url: https://hw6-email-and-images-fd9n.onrender.com # change to swegger
+  - url: https://hw7-swagger-c3bh.onrender.com # change to swegger
 
 paths: 
   /contacts:
