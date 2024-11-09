@@ -2,7 +2,7 @@ tags:
   - Contacts
 summary: Create contact
 operationId: createContact
-description: 'Create a contact with payload'
+description: 'Create a contact'
 security:
   - bearerAuth: []
 requestBody:
@@ -13,7 +13,7 @@ requestBody:
         required:
           - name
           - phoneNumber
-          - contactType
+          - email
         properties:
           name:
             description: "Contact's name"
@@ -28,13 +28,14 @@ requestBody:
             type: string
             example: 'samanthafox@gmail.com'
           contactType:
-            description: 'What type of contact is this'
+            description: 'Type of contact'
             type: string
             enum: ['work', 'home', 'personal']
+            example: personal
           isFavourite:
-            description: 'Whether is contact favourite'
+            description: 'Is the contact marked as favourite?'
             type: boolean
-            example: true
+            example: false
           photo:
             type: string
             format: binary
@@ -42,7 +43,7 @@ requestBody:
             example: https://res.cloudinary.com/de3pzgt9w/image/upload/v1730990743/kbox8a38w7i6fvoebjwd.webp
 responses:
   '201':
-    description: Creates a contact
+    description: 'Creates a contact'
     content:
       application/json:
         schema:
@@ -57,7 +58,7 @@ responses:
               example: 201
             message:
               type: string
-              example: Successfully created contact
+              example: 'Successfully created contact'
             data:
               type: object
               $ref: '../../components/schemas/contact.yaml'

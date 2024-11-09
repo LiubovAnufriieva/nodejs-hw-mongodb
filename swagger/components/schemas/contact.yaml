@@ -25,10 +25,12 @@ properties:
     description: 'What type of contact is this'
     type: string
     enum: ['work', 'home', 'personal']
+    example: home
   isFavourite:
     description: 'Whether is contact favourite'
     type: boolean
     example: true
+    default: false
   userId:
     description: "Contact's user id"
     type: string
@@ -37,3 +39,4 @@ properties:
     description: "Link to student's photo"
     type: string
     example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+    default: null

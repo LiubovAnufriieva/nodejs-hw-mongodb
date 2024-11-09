@@ -22,7 +22,7 @@ content:
           properties:
             message:
               type: string
-              example: Invalid input data for password reset
+              example: 'Invalid input data' 
             
             
         

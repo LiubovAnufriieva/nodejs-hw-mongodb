@@ -1,4 +1,4 @@
-description: Not Found Error
+description: 'Contact Not Found'
 content:
   application/json:
     schema:
@@ -13,12 +13,9 @@ content:
           example: 404
         message:
           type: string
-          example: NotFoundError
+          example: 'Contact Not Found'
         data:
           type: object
-          required:
-            - message
-          properties:
-            message:
-              type: string
-              example: 'Contact not found!'
+          example: {}
+       
+         
